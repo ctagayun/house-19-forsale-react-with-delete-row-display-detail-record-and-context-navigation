@@ -295,6 +295,40 @@ const handleSearchSubmit = () => {  //CC
    //navValue and the function called "navigate"  
    const [navState, setNavState] = React.useState({current: navValues.home, navigate});
 
+   const ComponentPicker = ({ currentNavLocation }) => {
+    console.log("Current Nav location: " + currentNavLocation);
+     switch (currentNavLocation) {
+      case navValues.home:
+        <>
+          <Search 
+              id="search"
+              value={searchTerm}
+              isFocused  
+              onInputChange={handleSearch}  
+              onClick={handleSearchSubmit} 
+              >
+            <strong>Search:</strong>
+            </Search>
+            <HouseList>
+                    list={searchedStories} 
+                  onRemoveHouse={handleRemoveStory} 
+                  onAddHouse={handleAddHouse} 
+                  onSelectHouse={onSelectHouse}
+                  selectedHouseSetter= {setSelectedHouseWrapper} 
+            </HouseList>
+          </>
+      case navValues.house:
+        return <HouseDetail house={selectedHouse}  />;
+
+      default:
+        return (
+          <h3>
+            No component for navigation value
+            {currentNavLocation} found
+          </h3>
+        );
+    }
+  };
   return (
     //Step4 - declare "value provider" to provide context value to
     //to child components. By providing a value={navState} to the 
@@ -302,15 +336,38 @@ const handleSearchSubmit = () => {  //CC
     //But in our case we want that to give that ABILITY to 
     //child components because they are the ones who have to initiate 
     //navigation
+
+
     <navigationContext.Provider value={navState}>  
-      <div>
+       
         <Header  headerText={welcome} /> 
         <hr />
-
         {stories.isError && <p>Something went wrong ...</p>}
         {stories.isLoading && <p>Loading ...</p> }
 
-        {selectedHouse ? (
+       <ComponentPicker currentNavLoacation={navState.current}/> 
+   
+    </navigationContext.Provider>
+  );
+};
+
+export {navigationContext} //Step3 - Nav
+export default App
+
+
+
+//========================================================== 
+ //Note on Map:
+ //Within the map() method, we have access to each object and its properties.
+ 
+ //useState
+ //By using useState, we are telling React that we want to have a 
+ //stateful value which changes over time. And whenever this stateful value 
+ //changes, the affected components (here: Search component) 
+ //will re-render to use it (here: to display the recent value).
+
+ /* 
+         {selectedHouse ? (
             <HouseDetail house={selectedHouse} />   
           ) : ( 
             <>  
@@ -327,31 +384,12 @@ const handleSearchSubmit = () => {  //CC
                         onRemoveHouse={handleRemoveStory} 
                         onAddHouse={handleAddHouse} 
                         onSelectHouse={onSelectHouse}
-                        selectedHouseSetter= {setSelectedHouseWrapper}// replace SetSelectedHouse 
+                        selectedHouseSetter= {setSelectedHouseWrapper} 
               /> 
             </>
                         
-          )}
+          )}  
 
-   </div>
-    </navigationContext.Provider>
-  );
-};
-
-export {navigationContext} //Step3 - Nav
-export default App
-
-//========================================================== 
- //Note on Map:
- //Within the map() method, we have access to each object and its properties.
- 
- //useState
- //By using useState, we are telling React that we want to have a 
- //stateful value which changes over time. And whenever this stateful value 
- //changes, the affected components (here: Search component) 
- //will re-render to use it (here: to display the recent value).
-
- /* 
      The filter() method takes a function 
         as an argument, which accesses each item in the array and returns /
         true or false. If the function returns true, meaning the condition is 
