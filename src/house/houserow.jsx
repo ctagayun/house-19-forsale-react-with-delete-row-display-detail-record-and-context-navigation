@@ -1,6 +1,7 @@
 
 import * as React from 'react';
 import currencyFormatter from "../helpers/currencyFormatter";
+import {navigationContext} from "../app"; //exported from app.js
 
 //Create another component that will display list of houses.
 //This component called "House" encapsulates the task of displaying 
@@ -19,20 +20,26 @@ import currencyFormatter from "../helpers/currencyFormatter";
    </button>
  
   */
-const HouseRow = ({house, onRemoveItem, selectHouse, selectedHouseSetter}) => (
+const HouseRow = ({house, onRemoveItem, selectHouse, selectedHouseSetter}) => {
     //selectedHouseSetter is the updater function. When a row 
     //in the table is clicked this HouseRow calls the "Callback" wrapper 
     //function defined in app.jsx     
     // const setSelectedHouseWrapper = (house) => {
     //    setSelectedHouse(house); <= updates the state in line 473
     //   }
-    
-
     //but is now pointing to: setSelectedHouseWrapper() callback function 
     //in App.JS to preserve state in app.JS
+   
+    //destructure the "navigate" function out
+    //"navigate" became part of the context because of:
+    //  <navigationContext.Provider value={navState}>
+    //navState now contains the "navigate" function
+    const {navigate} = useContext(navigationContext);
+
+    // <td onClick={() => selectedHouseSetter(house)}>
 
     <tr> 
-     <td onClick={() => selectedHouseSetter(house)}> 
+     <td onClick={() => navigate(navValues.house)}> 
          <a>{house.objectID} </a> 
       </td>  
      <td>{house.address}</td>
@@ -54,7 +61,7 @@ const HouseRow = ({house, onRemoveItem, selectHouse, selectedHouseSetter}) => (
      </td>
     </tr>
   
-);
+    };
 
 //Memoizing is way to cache the output of JSX component 
 //so that it doesn't re-render. It is done by wrapping the 

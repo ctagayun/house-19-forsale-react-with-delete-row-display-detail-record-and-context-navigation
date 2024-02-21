@@ -164,6 +164,10 @@ const storiesReducer = (state, action) => {
   
 //Step 2: Declared navigationContxt outside of the component. Since it is 
 //needed by child components we need to export it (Step3).
+//Note: navValues.home is the default provider
+// (see src/helper.navValues.js) 
+//navValues.home points to "home" where HouseList is 
+// where HouseList is rendered
 const navigationContext = React.createContext(navValues.home);
 
 /*===============================================
@@ -276,25 +280,38 @@ const handleSearchSubmit = () => {  //CC
     console.log("MyHouse = " + myHouse);
     setSelectedHouse(house);
   } 
-
  
- 
-    //Step6 - define a callback function to avoid unecessary rerenders in
+  //Step5 - define a callback function to avoid unecessary rerenders in
   //the future when other developers are going to add functionality,
-  //useCallback is good to use
+  //useCallback is good to use.
+  //   (navTo) => arrow  means pass it as parameter "setNavState"
+  //             and use it to update "navState"
   const navigate = React.useCallback(
-    (navTo) => setNavState({current:navTo, navigate}), //navTo indicates where to navigate to
+    (navTo) => setNavState({current:navTo, navigate}), 
+                           //"navTo" indicates where to navigate to.
+                           //"navigate" is another parameter.
+                           //It is the callback function
+                           //to call in order to update navState
     []
  );
-  //Step 5 Nav declare a state for the navigation
-  
+  //Step 6: navState declare a state for the navigation. setNavState is the setter.
   //Modify to add a function to the children by passing an object 
   //to the value of the provider that contains both STATE and the FUNCTION
         //const [navState, setNavState] = React.useState(navValues.home); 
-   //An object is passed with "current" property containing the 
-   //navValue and the function called "navigate"  
-   const [navState, setNavState] = React.useState({current: navValues.home, navigate});
 
+   //An object is passed with "current" property containing the 
+   //navValues.home (home: "Home", // where HouseList is rendered) 
+   //and the function called "navigate"  
+
+   //{current: navValues.home and "navigate" are the initial state.
+   // "navigate" is a callback function.
+   const [navState, setNavState] = React.useState({current: navValues.home, 
+                                   navigate});
+
+
+   /*======================================
+   //      Menu Navigation Items
+   ========================================*/                                  
    const ComponentPicker = ({ currentNavLocation }) => {
     console.log("Current Nav location: " + currentNavLocation);
      switch (currentNavLocation) {
@@ -314,7 +331,7 @@ const handleSearchSubmit = () => {  //CC
                   onRemoveHouse={handleRemoveStory} 
                   onAddHouse={handleAddHouse} 
                   onSelectHouse={onSelectHouse}
-                  selectedHouseSetter= {setSelectedHouseWrapper} 
+                  selectedHouseSetter= {setSelectedHouse} 
             </HouseList>
           </>
       case navValues.house:
@@ -337,6 +354,14 @@ const handleSearchSubmit = () => {  //CC
     //child components because they are the ones who have to initiate 
     //navigation
 
+    //this replaces the "fragment" node <> </>
+    //Declare the provider. If value={navState} for the provider
+    //is not given it will default to navValues.home (See   
+    //declaration of navigationContext in line 171
+
+    //navigationContext is only useful if we create a useState for
+    //for it. See line 301. This state manages the changes in
+    //in the navigation
 
     <navigationContext.Provider value={navState}>  
        
@@ -345,7 +370,7 @@ const handleSearchSubmit = () => {  //CC
         {stories.isError && <p>Something went wrong ...</p>}
         {stories.isLoading && <p>Loading ...</p> }
 
-       <ComponentPicker currentNavLoacation={navState.current}/> 
+       <ComponentPicker currentNavLocation={navState.current}/> 
    
     </navigationContext.Provider>
   );
