@@ -297,27 +297,41 @@ const handleSearchSubmit = () => {  //CC
    //and the function called "navigate"  
 
     
-   //Let's create a state for the navigation
-   const [navState, setNavState] = React.useState({current: navValues.home, 
-    navigate});
 
    //Let's create a wrapper function "navigate". useCallback
    //empty dependency array is used because this wrapper function
    //will be made available to all application components
    const navigate = React.useCallback(
       (navTo) => setNavState({current:navTo, navigate}), 
+                             //Instead of passing the navTo value
+                             //we pass an object by including
+                             //the callback function "navigate"
                              //"navTo" indicates where to navigate to.
                              //"navigate" is another parameter.
                              //It is the callback function
                              //to call in order to update navState
       []
    );
+
+      //Let's create a state for the navigation
+      const [navState, setNavState] = React.useState({current: navValues.home, 
+        navigate});
+    
   return (
     //Provides values of the context to its child components
     <navigationContext.Provider value={navState}>
         <Header  headerText={welcome} /> 
         
-          switch (nav.current) {
+        <Search 
+                id="search"
+                value={searchTerm}
+                isFocused  
+                onInputChange={handleSearch}  
+                onClick={handleSearchSubmit} 
+                > 
+          </Search>
+
+          {/* switch (nav.current) {
             case navValues.home:
               return <HouseList />;
             case navValues.house:
@@ -329,7 +343,7 @@ const handleSearchSubmit = () => {  //CC
                   {currentNavLocation} found
                 </h3>
               );
-          };
+          }; */}
        
     </navigationContext.Provider>
   );
