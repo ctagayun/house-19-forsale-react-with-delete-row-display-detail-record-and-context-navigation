@@ -271,29 +271,22 @@ const handleSearchSubmit = () => {  //CC
   //Introduce another state for displaying HouseDetail.
   //I am not passing initial value that means selectedHouse 
   //will be initiall undefined.
-  const [selectedHouse, setSelectedHouse] = React.useState(); 
+  //const [selectedHouse, setSelectedHouse] = React.useState(); //remove
 
  // Example setSelectedHouseWrapper with no useCallback hook
-  const setSelectedHouseWrapper = (house) => {
-    console.log("App component setSelectedHouseWrapper fires");
-    const myHouse = JSON.stringify(house);
-    console.log("MyHouse = " + myHouse);
-    setSelectedHouse(house);
-  } 
+  // const setSelectedHouseWrapper = (house) => {  //remove
+  //   console.log("App component setSelectedHouseWrapper fires");
+  //   const myHouse = JSON.stringify(house);
+  //   console.log("MyHouse = " + myHouse);
+  //   setSelectedHouse(house);
+  // } 
  
   //Step5 - define a callback function to avoid unecessary rerenders in
   //the future when other developers are going to add functionality,
   //useCallback is good to use.
   //   (navTo) => arrow  means pass it as parameter "setNavState"
   //             and use it to update "navState"
-  const navigate = React.useCallback(
-    (navTo) => setNavState({current:navTo, navigate}), 
-                           //"navTo" indicates where to navigate to.
-                           //"navigate" is another parameter.
-                           //It is the callback function
-                           //to call in order to update navState
-    []
- );
+ 
   //Step 6: navState declare a state for the navigation. setNavState is the setter.
   //Modify to add a function to the children by passing an object 
   //to the value of the provider that contains both STATE and the FUNCTION
@@ -303,80 +296,48 @@ const handleSearchSubmit = () => {  //CC
    //navValues.home (home: "Home", // where HouseList is rendered) 
    //and the function called "navigate"  
 
-   //{current: navValues.home and "navigate" are the initial state.
-   // "navigate" is a callback function.
+    
+   //Let's create a state for the navigation
    const [navState, setNavState] = React.useState({current: navValues.home, 
-                                   navigate});
+    navigate});
 
-
-   /*======================================
-   //      Menu Navigation Items
-   ========================================*/                                  
-   const ComponentPicker = ({ currentNavLocation }) => {
-    console.log("Current Nav location: " + currentNavLocation);
-     switch (currentNavLocation) {
-      case navValues.home:
-        <>
-          <Search 
-              id="search"
-              value={searchTerm}
-              isFocused  
-              onInputChange={handleSearch}  
-              onClick={handleSearchSubmit} 
-              >
-            <strong>Search:</strong>
-            </Search>
-            <HouseList>
-                    list={searchedStories} 
-                  onRemoveHouse={handleRemoveStory} 
-                  onAddHouse={handleAddHouse} 
-                  onSelectHouse={onSelectHouse}
-                  selectedHouseSetter= {setSelectedHouse} 
-            </HouseList>
-          </>
-      case navValues.house:
-        return <HouseDetail house={selectedHouse}  />;
-
-      default:
-        return (
-          <h3>
-            No component for navigation value
-            {currentNavLocation} found
-          </h3>
-        );
-    }
-  };
+   //Let's create a wrapper function "navigate". useCallback
+   //empty dependency array is used because this wrapper function
+   //will be made available to all application components
+   const navigate = React.useCallback(
+      (navTo) => setNavState({current:navTo, navigate}), 
+                             //"navTo" indicates where to navigate to.
+                             //"navigate" is another parameter.
+                             //It is the callback function
+                             //to call in order to update navState
+      []
+   );
   return (
-    //Step4 - declare "value provider" to provide context value to
-    //to child components. By providing a value={navState} to the 
-    //provider, app,js can change it using setNavState.
-    //But in our case we want that to give that ABILITY to 
-    //child components because they are the ones who have to initiate 
-    //navigation
-
-    //this replaces the "fragment" node <> </>
-    //Declare the provider. If value={navState} for the provider
-    //is not given it will default to navValues.home (See   
-    //declaration of navigationContext in line 171
-
-    //navigationContext is only useful if we create a useState for
-    //for it. See line 301. This state manages the changes in
-    //in the navigation
-
-    <navigationContext.Provider value={navState}>  
-       
+    //Provides values of the context to its child components
+    <navigationContext.Provider value={navState}>
         <Header  headerText={welcome} /> 
-        <hr />
-        {stories.isError && <p>Something went wrong ...</p>}
-        {stories.isLoading && <p>Loading ...</p> }
-
-       <ComponentPicker currentNavLocation={navState.current}/> 
-   
+        
+          switch (nav.current) {
+            case navValues.home:
+              return <HouseList />;
+            case navValues.house:
+              return <House />;
+            default:
+              return (
+                <h3>
+                  No component for navigation value
+                  {currentNavLocation} found
+                </h3>
+              );
+          };
+       
     </navigationContext.Provider>
   );
 };
+//EOF App.jsx section
 
-export {navigationContext} //Step3 - Nav
+export {navigationContext} //Step3 - need to export because child components need it
+                           //
 export default App
 
 

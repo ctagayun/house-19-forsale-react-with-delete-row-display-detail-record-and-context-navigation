@@ -1,29 +1,3 @@
-/*
-   React State:
-    React state introduces a mutable data structure (called: stateful values). 
-  These stateful values get instantiated in a React component as so 
-  called "state", can be passed with props as vehicle down to child components, 
-  but can also get mutated by using a function to modify the state.
-
-      "When a state gets mutated, the component 
-       with the state and all child components will
-       re-render.""
-
-    Whenever the user clicks Add button in the HouseList you will 
-  note that the added detail house record doesn't get added to the
-  list of houses.
-   
-    To address this issue we will use useState. By using useState 
-  we are telling react we want to have a stateful value which changes
-  when we click the "Add" button. 
-    The logic of handler function for the "Add" button adds a new record
-  and the state update function set the updated state. (see HouseList)
-     
- Note:
-  Everything that we pass from a parent component to a child component 
-  via the component element's HTML attribute (in this case "list" see instantiation  
-  in line 69 of App component) can be accessed in the child component
-*/
 
 import * as React from 'react';
 import HouseRow  from './houserow';
@@ -31,7 +5,7 @@ import HouseRow  from './houserow';
 
 //We are not using selectedHouseSetter in HouseList. We just 
 //want to pass it as props to HouseRow
-const HouseList = ({list, onRemoveHouse, onAddHouse, onSelectHouse, selectedHouseSetter}) =>
+const HouseList = ({list, onRemoveHouse, onAddHouse, onSelectHouse}) =>
     {
       const mySearchHouses = JSON.stringify(list);
       console.log("SearchedHouses = " + mySearchHouses );
@@ -63,13 +37,10 @@ const HouseList = ({list, onRemoveHouse, onAddHouse, onSelectHouse, selectedHous
                   <HouseRow
                       key={record.objectID}
                       objectID={record.objectID} 
-                      house={record}
+                      house={record}  
                       onRemoveItem = {onRemoveHouse} //contains the onRemoveItem handler
-                      onAddHouse = {onAddHouse}
                       onSelectHouse={onSelectHouse}
-                      selectedHouseSetter = {selectedHouseSetter} //points to the wrapper function
-                                                    //setSelectedHouseWrapper which wrapped
-                                                    //setSelectedHouse
+                     
                   />
                 ))}
               </tbody>
