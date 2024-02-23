@@ -1,6 +1,7 @@
 
 import * as React from 'react';
 import HouseRow  from './houserow';
+//import {navigationContext} from "../app";
 //import { HouseRowMemoized } from './houserow';
 
 //We are not using selectedHouseSetter in HouseList. We just 

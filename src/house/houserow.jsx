@@ -1,8 +1,8 @@
-
-import { useContext } from "react";
+import * as React from 'react';
+//import { useContext } from "react";
 import currencyFormatter from "../helpers/currencyFormatter";
 import navValues from "../helpers/navValues";
-import {navigationContext} from "./app"; //exported from app.js
+import { navigationContext } from "/src/app"; //exported from app.js
 
 const HouseRow = ({house, onRemoveItem}) => {
    

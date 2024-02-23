@@ -6,11 +6,11 @@
 import { useContext } from "react";
 import currencyFormatter from "../helpers/currencyFormatter";
 import defaultPhoto from "../images/defaultPhoto";
-import { navigationContext } from "./app";
+import { navigationContext } from "/src/app";
 
 const HouseDetail = ({ house, onClick }) => {
   //Access the navigation context
-  const {param: housedetail} =useContext(navigationContext);
+  const {param: housedetail} = useContext(navigationContext);
   const myHouse = JSON.stringify(housedetail);
   console.log("House Detail house Props = " + myHouse);
   return (

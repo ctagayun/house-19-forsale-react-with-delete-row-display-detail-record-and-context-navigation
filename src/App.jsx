@@ -305,22 +305,38 @@ const handleSearchSubmit = () => {  //CC
    //Note: add the "param" to houseDetail to
    const navigate = React.useCallback(
       (navTo, param) => setNavState({current:navTo, param, navigate}), 
-                             //Instead of passing the navTo value
+                             //Instead of passing the navTo value alone
                              //we pass an object by including
                              //the callback function "navigate", param,
                              //"navTo" indicates where to navigate to.
                              //"navigate" is the name of the callback()
                              //"param" points to the instance of housedetail
                              //we are going to display
-      []
+         
+         //Impt. Current: means instead of just the navTo value an object
+         //is passed in with the "CURRENT" property containing the navTo
+         //and the function "navigate"                
+
+      [] //Impt. Use an empty dependency array because the function will
+         //made available to all components and we are not sure
+         //what they will do with it. In the future other developers
+         //might add functionality... then useCallback is good to use
    );
 
-      //Let's create a state for the navigation
-      const [navState, setNavState] = React.useState({current: navValues.home, 
-        navigate});
+ //Let's create a state for the navigation and let's create a wrapper
+ //function "navigate" and pass it as a parameter to the useState
+
+  //Impt. Again  Current: means instead of just the navTo value an object
+  //is passed in with the "CURRENT" property containing the navValues
+ //and the function "navigate"      
+ const [navState, setNavState] = React.useState({current: navValues.home, 
+    navigate});
     
   return (
-    //Provides values of the context to its child components
+    //Provider give values of the context to its child components.
+    //Very important! Dont provide static value. But create 
+    //state and use it as a value and manipulate its value using
+    //setNavState in the child components (see houseRow and houseList)
     <navigationContext.Provider value={navState}>
         <Header  headerText={welcome} /> 
         
@@ -333,19 +349,7 @@ const handleSearchSubmit = () => {  //CC
                 > 
           </Search>
 
-          {/* switch (nav.current) {
-            case navValues.home:
-              return <HouseList />;
-            case navValues.housedetail:
-              return <House />;
-            default:
-              return (
-                <h3>
-                  No component for navigation value
-                  {currentNavLocation} found
-                </h3>
-              );
-          }; */}
+      <ComponentPicker currentNavLocation={navState.current} />          
        
     </navigationContext.Provider>
   );
