@@ -3,11 +3,15 @@
   conditionally (display houselist or this component)
 */
 
+import { useContext } from "react";
 import currencyFormatter from "../helpers/currencyFormatter";
 import defaultPhoto from "../images/defaultPhoto";
+import { navigationContext } from "./app";
 
 const HouseDetail = ({ house, onClick }) => {
-  const myHouse = JSON.stringify(house);
+  //Access the navigation context
+  const {param: housedetail} =useContext(navigationContext);
+  const myHouse = JSON.stringify(housedetail);
   console.log("House Detail house Props = " + myHouse);
   return (
     <div>
@@ -17,26 +21,26 @@ const HouseDetail = ({ house, onClick }) => {
           <img
             className="img-fluid"
             src={
-              house.photo ? `./src/images/houseImages/${house.photo}.jpeg` : defaultPhoto
+              housedetail.photo ? `./src/images/houseImages/${housedetail.photo}.jpeg` : defaultPhoto
             }
-            alt="House pic"
+            alt="HouseDetail picture"
           />
         </div>
         </div>
         <div className="col-6">
         <div className="row mt-2">
-          <h5 className="col-12">{house.country}</h5>
+          <h5 className="col-12">{housedetail.country}</h5>
         </div>
         <div className="row">
-          <h3 className="col-12">{house.address}</h3>
+          <h3 className="col-12">{housedetail.address}</h3>
         </div>
         <div className="row">
           <h2 className="themeFontColor col-12">
-            {currencyFormatter.format(house.price)}
+            {currencyFormatter.format(housedetail.price)}
           </h2>
         </div>
         <div className="row">
-          <div className="col-12 mt-3">{house.description}</div>
+          <div className="col-12 mt-3">{housedetail.description}</div>
         </div>
         </div>
 

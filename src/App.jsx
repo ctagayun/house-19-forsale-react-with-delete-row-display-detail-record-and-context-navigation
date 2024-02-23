@@ -297,19 +297,21 @@ const handleSearchSubmit = () => {  //CC
    //and the function called "navigate"  
 
     
-
+   
    //Let's create a wrapper function "navigate". useCallback
    //empty dependency array is used because this wrapper function
    //will be made available to all application components
+   //https://app.pluralsight.com/ilx/video-courses/9a3771fa-626e-4708-8634-c49cc8616922/972a5150-beb4-453d-9097-82a1816770e0/ba3c6dd2-a1b0-409c-91a6-2c3961b775e8
+   //Note: add the "param" to houseDetail to
    const navigate = React.useCallback(
-      (navTo) => setNavState({current:navTo, navigate}), 
+      (navTo, param) => setNavState({current:navTo, param, navigate}), 
                              //Instead of passing the navTo value
                              //we pass an object by including
-                             //the callback function "navigate"
+                             //the callback function "navigate", param,
                              //"navTo" indicates where to navigate to.
-                             //"navigate" is another parameter.
-                             //It is the callback function
-                             //to call in order to update navState
+                             //"navigate" is the name of the callback()
+                             //"param" points to the instance of housedetail
+                             //we are going to display
       []
    );
 
@@ -334,7 +336,7 @@ const handleSearchSubmit = () => {  //CC
           {/* switch (nav.current) {
             case navValues.home:
               return <HouseList />;
-            case navValues.house:
+            case navValues.housedetail:
               return <House />;
             default:
               return (

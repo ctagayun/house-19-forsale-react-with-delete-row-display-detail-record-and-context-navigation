@@ -1,7 +1,7 @@
 
 const navValues = {
-    home: "Home", // where HouseList is rendered
-    house: "House" // where HouseDetail is rendered
+    houselist: "HouseList", // where HouseList is rendered
+    housedetail: "HouseDetail" // where HouseDetail is rendered
 }
 
 export default navValues;
