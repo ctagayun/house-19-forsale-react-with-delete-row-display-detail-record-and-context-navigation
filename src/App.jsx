@@ -5,7 +5,7 @@ import HouseList from './house/houseList';
 import Search from './house/search';
 import HouseDetail from '../src/house/housedetail';
 import navValues from "../src/helpers/navValues"; //Step 1 - define nav structure
-
+import ComponentPicker from "./componentPicker";
 /*
       At the moment initialHouses is unstateful variable
       To gain control over the list, lets make it stateful.

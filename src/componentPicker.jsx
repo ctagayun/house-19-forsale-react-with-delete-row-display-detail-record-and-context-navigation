@@ -2,7 +2,6 @@ import navValues from "./helpers/navValues";
 import HouseList from './house/houseList';
 import Search from './house/search';
 import HouseDetail from './house/housedetail';
-import navValues from "./helpers/navValues"; //Step 1 - define nav structure
 
 const ComponentPicker = ({ currentNavLocation }) => {
   switch (currentNavLocation) {
@@ -14,7 +13,7 @@ const ComponentPicker = ({ currentNavLocation }) => {
       return (
         <h3>
           No component for navigation value
-          {currentNavLocation} found
+          {currentNavLocation} found.  
         </h3>
       );
   }
