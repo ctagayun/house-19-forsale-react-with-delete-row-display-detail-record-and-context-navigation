@@ -274,12 +274,12 @@ const handleSearchSubmit = () => {  //CC
   //const [selectedHouse, setSelectedHouse] = React.useState(); //remove
 
  // Example setSelectedHouseWrapper with no useCallback hook
-  // const setSelectedHouseWrapper = (house) => {  //remove
-  //   console.log("App component setSelectedHouseWrapper fires");
-  //   const myHouse = JSON.stringify(house);
-  //   console.log("MyHouse = " + myHouse);
-  //   setSelectedHouse(house);
-  // } 
+   const setSelectedHouseWrapper = (house) => {  //remove
+     console.log("App component setSelectedHouseWrapper fires");
+     const myHouse = JSON.stringify(house);
+     console.log("MyHouse = " + myHouse);
+     setSelectedHouse(house);
+   } 
  
   //Step5 - define a callback function to avoid unecessary rerenders in
   //the future when other developers are going to add functionality,
@@ -350,7 +350,13 @@ const handleSearchSubmit = () => {  //CC
           </Search>
        
        
-      <ComponentPicker currentNavLocation={navState.current} />          
+      <ComponentPicker currentNavLocation= {navState.current} 
+                        list={searchedStories} 
+                        onRemoveHouse={handleRemoveStory} 
+                        onAddHouse={handleAddHouse} 
+                        onSelectHouse={onSelectHouse}
+                        selectedHouseSetter= {setSelectedHouseWrapper}
+      />          
        
     </navigationContext.Provider>
   );

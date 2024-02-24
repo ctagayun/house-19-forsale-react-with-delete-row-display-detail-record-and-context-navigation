@@ -6,6 +6,9 @@ import { navigationContext } from "/src/app"; //exported from app.js
 
 const HouseRow = ({house, onRemoveItem}) => {
    
+   console.log("House Row fired")
+   const myHouse = JSON.stringify(house);
+   console.log("House prop = " + myHouse);
     //Call useContext on the navigationContext.
     //This returns the state "object" consisting of 
     //    navTo 
@@ -15,15 +18,17 @@ const HouseRow = ({house, onRemoveItem}) => {
 
     //This returns the state "object. Therefore destructure
     //"navigate" so that we can access its properties 
-    const {navigate} = useContext(navigationContext);
+    const {navigate} = React.useContext(navigationContext);
 
     //after destructuring we can do this:  navigate(navValues.housedetail)}
     //navValues.housedetail points to HouseDetail component
     //housedetail point to the instance of HouseDetail
+    
+    return(
     <tr> 
-     <td onClick={() => navigate(navValues.housedetail, housedetail)}> 
-         <a>{house.objectID} </a> 
-      </td>  
+      <td onClick={() => navigate(navValues.housedetail, housedetail)}> 
+          <a>{house.objectID} </a> 
+       </td>
      <td>{house.address}</td>
      <td>{house.country}</td>
     
@@ -42,7 +47,7 @@ const HouseRow = ({house, onRemoveItem}) => {
     </span>
      </td>
     </tr>
-  
+     );
     };
 
 //Memoizing is way to cache the output of JSX component 
