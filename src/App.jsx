@@ -329,7 +329,7 @@ const handleSearchSubmit = () => {  //CC
   //Impt. Again  Current: means instead of just the navTo value an object
   //is passed in with the "CURRENT" property containing the navValues
  //and the function "navigate"      
- const [navState, setNavState] = React.useState({current: navValues.home, 
+ const [navState, setNavState] = React.useState({current: navValues.houselist, 
     navigate});
     
   return (
@@ -348,7 +348,8 @@ const handleSearchSubmit = () => {  //CC
                 onClick={handleSearchSubmit} 
                 > 
           </Search>
-
+       
+       
       <ComponentPicker currentNavLocation={navState.current} />          
        
     </navigationContext.Provider>

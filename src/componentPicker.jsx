@@ -4,6 +4,8 @@ import Search from './house/search';
 import HouseDetail from './house/housedetail';
 
 const ComponentPicker = ({ currentNavLocation }) => {
+  const myCurrNavLoc = JSON.stringify(currentNavLocation);
+  console.log("CurrentNavLocation = " + myCurrNavLoc);
   switch (currentNavLocation) {
     case navValues.houselist:
       return <HouseList />; //needs props
