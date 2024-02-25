@@ -317,13 +317,14 @@ const handleSearchSubmit = () => {  //CC
 
    const navigate = React.useCallback(
       (navTo, param) => setNavState({current:navTo, param, navigate}), 
-                             //Instead of passing the navTo value alone
-                             //we pass an object by including
-                             //the callback function "navigate", param,
-                             //  1. "navTo" indicates where to navigate to.
-                             //  2. "navigate" is the name of the callback()
-                             //  3. "param" points to the instance of housedetail
-                             //      we are going to display IN THE HOUSEDETAIL component
+              //Add "navTo", "param", "navigate" to the state object
+
+              //By passing the three items in the state object,
+              //we are passing a complex object instead of a simple variable:                             //the callback function "navigate", param,
+              //  1. "navTo" indicates where to navigate to.
+              //  2. "navigate" is the name of the callback()
+              //  3. "param" points to the instance of housedetail
+              //      we are going to display IN THE HOUSEDETAIL component
          
          //Impt. Current: means instead of just the navTo value an object
          //is passed in with the "CURRENT" property containing the navTo

@@ -10,9 +10,13 @@ import { navigationContext } from "/src/app";
 
 const HouseDetail = ({ house, onClick }) => {
   //Access the navigation context
+  //First destructure param and RENAME it to housedetail 
+  //for clarity AND WE DON'T HAVE TO CHANGE IN THE 
+  //ORIGINAL JSX (e.g  housedetail.country, housedetail.address)
   const {param: housedetail} = useContext(navigationContext);
+ 
   const myHouse = JSON.stringify(housedetail);
-  console.log("House Detail house Props = " + myHouse);
+  console.log("House Detail STORE IN PARAM IS = " + myHouse);
   return (
     <div>
       <div className="row">
