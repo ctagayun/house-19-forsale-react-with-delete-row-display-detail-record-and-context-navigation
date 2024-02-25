@@ -14,23 +14,23 @@ const HouseRow = ({house, onRemoveItem}) => {
     //    navTo 
     //    navigate
     //  setNavState({current:navTo, navigate})
-    //we passed etNavState. (See line 304 inApp.jsx)
+    //we passed setNavState. (See line 304 inApp.jsx)
 
-    //This returns the state "object. Therefore destructure
-    //"navigate" so that we can access its properties 
+    //Since an object is returned (state) instead of a single
+    //variable, we need to destructure "navigate" so that we 
+    //can access its properties 
     const {navigate} = React.useContext(navigationContext);
 
-    //after destructuring we can do this:  navigate(navValues.housedetail)}
-    //navValues.housedetail points to HouseDetail component
-    //housedetail point to the instance of HouseDetail
+    //After destructuring we can call navigate(): 
+    //   navigate(navValues.housedetail, housedetail)}
+    //     1. navValues.housedetail key-value pair points to 
+    //        HouseDetail component
+    //     2. housedetail the second parameter points to an INSTANCE
+    //        of HouseDetail component that we want to display
     
-//     <td onClick={() => navigate(navValues.housedetail, housedetail)}> 
-//     <a>{house.objectID} </a> 
-//  </td>
-
     return(
     <tr> 
-      <td onClick={() => selectedHouseSetter(house)}> 
+      <td onClick={() => navigate(navValues.housedetail)}> 
          <a>{house.objectID} </a> 
       </td>
      <td>{house.address}</td>

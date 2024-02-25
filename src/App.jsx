@@ -320,10 +320,10 @@ const handleSearchSubmit = () => {  //CC
                              //Instead of passing the navTo value alone
                              //we pass an object by including
                              //the callback function "navigate", param,
-                             //"navTo" indicates where to navigate to.
-                             //"navigate" is the name of the callback()
-                             //"param" points to the instance of housedetail
-                             //we are going to display
+                             //  1. "navTo" indicates where to navigate to.
+                             //  2. "navigate" is the name of the callback()
+                             //  3. "param" points to the instance of housedetail
+                             //      we are going to display IN THE HOUSEDETAIL component
          
          //Impt. Current: means instead of just the navTo value an object
          //is passed in with the "CURRENT" property containing the navTo
