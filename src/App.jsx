@@ -168,6 +168,10 @@ const storiesReducer = (state, action) => {
 // (see src/helper.navValues.js) 
 //navValues.home points to "home" where HouseList is 
 // where HouseList is rendered
+
+//Important! When the value of the context changes
+// all consumer components will be re-rendered
+
 const navigationContext = React.createContext(navValues.home);
 
 /*===============================================
@@ -271,15 +275,15 @@ const handleSearchSubmit = () => {  //CC
   //Introduce another state for displaying HouseDetail.
   //I am not passing initial value that means selectedHouse 
   //will be initiall undefined.
-  const [selectedHouse, setSelectedHouse] = React.useState(); //remove
+  //No longer needed by navigation context
+  //const [selectedHouse, setSelectedHouse] = React.useState(); //remove
 
+//Not needed by navigation context
  // Example setSelectedHouseWrapper with no useCallback hook
-   const setSelectedHouseWrapper = (house) => {  //remove
-     console.log("App component setSelectedHouseWrapper fires");
-     const myHouse = JSON.stringify(house);
-     console.log("MyHouse = " + myHouse);
-     setSelectedHouse(house);
-   } 
+ // This is the coe that renders HouseList
+ //  const setSelectedHouseWrapper = (house) => {  //remove
+ //    setSelectedHouse(house);
+ //  } 
  
   //Step5 - define a callback function to avoid unecessary rerenders in
   //the future when other developers are going to add functionality,
@@ -355,7 +359,7 @@ const handleSearchSubmit = () => {  //CC
                         onRemoveHouse={handleRemoveStory} 
                         onAddHouse={handleAddHouse} 
                         onSelectHouse={onSelectHouse}
-                        selectedHouseSetter= {setSelectedHouseWrapper}
+                        //selectedHouseSetter= {setSelectedHouseWrapper}
       />          
        
     </navigationContext.Provider>

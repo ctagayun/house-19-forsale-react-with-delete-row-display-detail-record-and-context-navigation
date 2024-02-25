@@ -4,7 +4,7 @@ import currencyFormatter from "../helpers/currencyFormatter";
 import navValues from "../helpers/navValues";
 import { navigationContext } from "/src/app"; //exported from app.js
 
-const HouseRow = ({house, onRemoveItem, onSelectHouse, selectedHouseSetter}) => {
+const HouseRow = ({house, onRemoveItem}) => {
    
    console.log("House Row fired")
    const myHouse = JSON.stringify(house);

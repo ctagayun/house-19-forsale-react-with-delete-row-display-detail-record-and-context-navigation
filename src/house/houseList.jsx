@@ -7,11 +7,9 @@ import HouseRow  from './houserow';
 //We are not using selectedHouseSetter in HouseList. We just 
 //want to pass it as props to HouseRow
 const HouseList = ({list, 
-          onRemoveHouse,
-          onAddHouse, 
-          onSelectHouse,
-          selectedHouseSetter
-         }) =>
+                   onRemoveHouse,
+                   onAddHouse, 
+          }) =>
     {
       const mySearchHouses = JSON.stringify(list);
       console.log("SearchedHouses in HouseList Component = " + mySearchHouses );
