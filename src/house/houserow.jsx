@@ -4,7 +4,7 @@ import currencyFormatter from "../helpers/currencyFormatter";
 import navValues from "../helpers/navValues";
 import { navigationContext } from "/src/app"; //exported from app.js
 
-const HouseRow = ({house, onRemoveItem}) => {
+const HouseRow = ({house, onRemoveItem, onSelectHouse, selectedHouseSetter}) => {
    
    console.log("House Row fired")
    const myHouse = JSON.stringify(house);
@@ -24,11 +24,15 @@ const HouseRow = ({house, onRemoveItem}) => {
     //navValues.housedetail points to HouseDetail component
     //housedetail point to the instance of HouseDetail
     
+//     <td onClick={() => navigate(navValues.housedetail, housedetail)}> 
+//     <a>{house.objectID} </a> 
+//  </td>
+
     return(
     <tr> 
-      <td onClick={() => navigate(navValues.housedetail, housedetail)}> 
-          <a>{house.objectID} </a> 
-       </td>
+      <td onClick={() => selectedHouseSetter(house)}> 
+         <a>{house.objectID} </a> 
+      </td>
      <td>{house.address}</td>
      <td>{house.country}</td>
     

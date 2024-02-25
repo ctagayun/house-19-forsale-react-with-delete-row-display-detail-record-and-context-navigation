@@ -271,7 +271,7 @@ const handleSearchSubmit = () => {  //CC
   //Introduce another state for displaying HouseDetail.
   //I am not passing initial value that means selectedHouse 
   //will be initiall undefined.
-  //const [selectedHouse, setSelectedHouse] = React.useState(); //remove
+  const [selectedHouse, setSelectedHouse] = React.useState(); //remove
 
  // Example setSelectedHouseWrapper with no useCallback hook
    const setSelectedHouseWrapper = (house) => {  //remove

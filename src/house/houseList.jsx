@@ -10,6 +10,7 @@ const HouseList = ({list,
           onRemoveHouse,
           onAddHouse, 
           onSelectHouse,
+          selectedHouseSetter
          }) =>
     {
       const mySearchHouses = JSON.stringify(list);
@@ -45,7 +46,7 @@ const HouseList = ({list,
                       house={record}  
                       onRemoveItem = {onRemoveHouse} //contains the onRemoveItem handler
                       onSelectHouse={onSelectHouse}
-                     
+                      selectedHouseSetter = {selectedHouseSetter}
                   />
                 ))}
               </tbody>
