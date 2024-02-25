@@ -172,7 +172,7 @@ const storiesReducer = (state, action) => {
 //Important! When the value of the context changes
 // all consumer components will be re-rendered
 
-const navigationContext = React.createContext(navValues.home);
+const navigationContext = React.createContext(navValues.houselist);
 
 /*===============================================
 // App section
@@ -285,28 +285,36 @@ const handleSearchSubmit = () => {  //CC
  //    setSelectedHouse(house);
  //  } 
  
-  //Step5 - define a callback function to avoid unecessary rerenders in
+  //  Define a callback function to avoid unecessary rerenders in
   //the future when other developers are going to add functionality,
   //useCallback is good to use.
   //   (navTo) => arrow  means pass it as parameter "setNavState"
   //             and use it to update "navState"
  
-  //Step 6: navState declare a state for the navigation. setNavState is the setter.
-  //Modify to add a function to the children by passing an object 
-  //to the value of the provider that contains both STATE and the FUNCTION
-        //const [navState, setNavState] = React.useState(navValues.home); 
+  
+   //Let's create a wrapper function called "navigate". Use USECALLBACK
+   //hook WITH empty dependency array. EMPTY IS USED because this 
+   //wrapper function will be made AVAILABLE to all application components.
 
-   //An object is passed with "current" property containing the 
+   //This is how it works:
+   //   1. Within the useCallback hook CALL setNavState state setter
+   //to update navState. 
+   //   2. Pass the following paamters to setNavState
+   //        navTo - where to navigate to
+   //        param 
+   //        and "navigate" - the name of the wrapper function
+   //   3. Update the parameter to setNavState to accept an
+   //      include "navigate". Since we have two parameters to the
+   //      the state updater (navTo, navigater), we need to pass 
+   //      it as an "object". To accomplish this a affix "current:"
+   //      
+   // An object is passed with "current" property containing the 
    //navValues.home (home: "Home", // where HouseList is rendered) 
    //and the function called "navigate"  
-
-    
-   
-   //Let's create a wrapper function "navigate". useCallback
-   //empty dependency array is used because this wrapper function
-   //will be made available to all application components
    //https://app.pluralsight.com/ilx/video-courses/9a3771fa-626e-4708-8634-c49cc8616922/972a5150-beb4-453d-9097-82a1816770e0/ba3c6dd2-a1b0-409c-91a6-2c3961b775e8
    //Note: add the "param" to houseDetail to
+
+
    const navigate = React.useCallback(
       (navTo, param) => setNavState({current:navTo, param, navigate}), 
                              //Instead of passing the navTo value alone
@@ -319,22 +327,22 @@ const handleSearchSubmit = () => {  //CC
          
          //Impt. Current: means instead of just the navTo value an object
          //is passed in with the "CURRENT" property containing the navTo
-         //and the function "navigate"                
+         //and the function "navigate". Refer to line 342:  
+         //            
+         //    const [navState, setNavState] = 
+         //        React.useState({current: navValues.houselist, navigate});
 
       [] //Impt. Use an empty dependency array because the function will
          //made available to all components and we are not sure
          //what they will do with it. In the future other developers
          //might add functionality... then useCallback is good to use
    );
-
- //Let's create a state for the navigation and let's create a wrapper
- //function "navigate" and pass it as a parameter to the useState
-
+ 
   //Impt. Again  Current: means instead of just the navTo value an object
   //is passed in with the "CURRENT" property containing the navValues
- //and the function "navigate"      
+  //and the function "navigate"      
  const [navState, setNavState] = React.useState({current: navValues.houselist, 
-    navigate});
+                                                 navigate});
     
   return (
     //Provider give values of the context to its child components.
@@ -353,8 +361,19 @@ const handleSearchSubmit = () => {  //CC
                 > 
           </Search>
        
-       
-      <ComponentPicker currentNavLocation= {navState.current} 
+        
+      <ComponentPicker currentNavLocation= {navState}  //use state instead of static value
+                            //setting static values like currentNavLocation= {navValues.houselist}
+                            //is not good. Instead create another state and use it
+                            //for this purpose. See:
+                            //   const [navState, setNavState] = 
+                            //   React.useState({current: navValues.houselist, 
+                            //      navigate});
+                            //navState can be dynamically changed. In our case 
+                            //we want the child components to be the one to 
+                            //dynamically change "navState" because they are the
+                            //ones who have to INITIATE NAVIGATION. To accomplish
+                            //this let's create a WRAPPER FUNCTION called "navigate"
                         list={searchedStories} 
                         onRemoveHouse={handleRemoveStory} 
                         onAddHouse={handleAddHouse} 
