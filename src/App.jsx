@@ -362,7 +362,11 @@ const handleSearchSubmit = () => {  //CC
           </Search>
        
         
-      <ComponentPicker currentNavLocation= {navState}  //use state instead of static value
+      <ComponentPicker currentNavLocation= {navState.current} 
+                            //Component picker is passed the CURRENT nav location
+                            //with a PROP.
+                            
+                            //use state instead of static value
                             //setting static values like currentNavLocation= {navValues.houselist}
                             //is not good. Instead create another state and use it
                             //for this purpose. See:
@@ -377,7 +381,7 @@ const handleSearchSubmit = () => {  //CC
                         list={searchedStories} 
                         onRemoveHouse={handleRemoveStory} 
                         onAddHouse={handleAddHouse} 
-                        onSelectHouse={onSelectHouse}
+                        //onSelectHouse={onSelectHouse}
                         //selectedHouseSetter= {setSelectedHouseWrapper}
       />          
        

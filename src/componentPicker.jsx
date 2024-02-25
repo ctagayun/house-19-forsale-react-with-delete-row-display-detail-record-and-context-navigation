@@ -6,9 +6,8 @@ import HouseDetail from './house/housedetail';
 const ComponentPicker = ({ currentNavLocation, 
                            list, 
                            onRemoveHouse, 
-                           onAddHouse, 
-                           onSelectHouse, 
-                           selectedHouseSetter }) => {
+                           onAddHouse }) => {
+ 
   const myCurrNavLoc = JSON.stringify(currentNavLocation);
   console.log("CurrentNavLocation = " + myCurrNavLoc);
 
@@ -21,20 +20,12 @@ const ComponentPicker = ({ currentNavLocation,
   const myonAddHouse = JSON.stringify(onAddHouse);
   console.log("myonAddHouse = " + myonAddHouse);
 
-  const myononSelectHouse = JSON.stringify(onSelectHouse);
-  console.log("myononSelectHouse = " + myononSelectHouse);
-
-  const myonselectedHouseSetter = JSON.stringify(selectedHouseSetter);
-  console.log("myonselectedHouseSetter = " + myonselectedHouseSetter);
-
   switch (currentNavLocation) {
     case navValues.houselist:
       return <HouseList 
             list={list} 
             onRemoveHouse={onRemoveHouse} 
             onAddHouse={onAddHouse} 
-            onSelectHouse={onSelectHouse}
-            selectedHouseSetter = {selectedHouseSetter}
       />; 
 
     case navValues.housedetail:
