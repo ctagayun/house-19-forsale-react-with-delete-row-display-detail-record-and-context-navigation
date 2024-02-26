@@ -20,7 +20,7 @@ const HouseDetail = ({ house, onClick }) => {
   //ORIGINAL JSX (e.g  housedetail.country, housedetail.address)
   const {param: housedetail} = useContext(navigationContext);
  
-  const myHouse = JSON.stringify(house);
+  const myHouse = JSON.stringify(housedetail);
   console.log("House Detail STORED IN PARAM IS = " + myHouse);
   return (
     <div>
