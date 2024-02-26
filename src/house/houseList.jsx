@@ -10,7 +10,8 @@ import HouseRow  from './houserow';
 //declare NAVIGATIONCONTEXT in app.jsx
 const HouseList = ({list, 
                    onRemoveHouse,
-                   onAddHouse, 
+                   onAddHouse,
+                   onSelectHouse 
           }) =>
     {
       const mySearchHouses = JSON.stringify(list);
@@ -45,6 +46,7 @@ const HouseList = ({list,
                       objectID={record.objectID} 
                       ahouserow={record}  
                       onRemoveItem = {onRemoveHouse} //contains the onRemoveItem handler
+                      onSelectHouse={onSelectHouse}
                   />
                 ))}
               </tbody>

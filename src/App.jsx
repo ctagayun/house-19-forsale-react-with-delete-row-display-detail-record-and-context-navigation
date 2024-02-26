@@ -384,7 +384,7 @@ const handleSearchSubmit = () => {  //CC
                         list={searchedStories} 
                         onRemoveHouse={handleRemoveStory} 
                         onAddHouse={handleAddHouse} 
-                        //onSelectHouse={onSelectHouse}
+                        onSelectHouse={onSelectHouse}
                         //selectedHouseSetter= {setSelectedHouseWrapper}
       />          
        

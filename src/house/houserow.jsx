@@ -5,7 +5,7 @@ import navValues from "../helpers/navValues";
 import { navigationContext } from "/src/app"; //exported from app.js
 
 //prop ahouserow is a one row to be written to HouseList component
-const HouseRow = ({ahouserow, onRemoveItem}) => {
+const HouseRow = ({ahouserow, onRemoveItem, onSelectHouse}) => {
    
    console.log("House Row fired")
    const myHouse = JSON.stringify(ahouserow);
@@ -32,9 +32,9 @@ const HouseRow = ({ahouserow, onRemoveItem}) => {
     
     return(
     <tr> 
-      <td onClick={() => navigate(navValues.housedetail, ahouserow)}> 
-         <a>{ahouserow.objectID} </a> 
-      </td>
+        <td onClick={() => navigate(navValues.housedetail, ahouserow)}> 
+        <a>{ahouserow.objectID} </a> 
+     </td>
      <td>{ahouserow.address}</td>
      <td>{ahouserow.country}</td>
     

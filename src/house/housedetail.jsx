@@ -30,7 +30,7 @@ const HouseDetail = ({ house, onClick }) => {
           <img
             className="img-fluid"
             src={
-              house.photo ? `./src/images/houseImages/${housedetail.photo}.jpeg` : defaultPhoto
+              housedetail.photo ? `./src/images/houseImages/${housedetail.photo}.jpeg` : defaultPhoto
             }
             alt="HouseDetail picture"
           />
