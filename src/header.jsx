@@ -1,6 +1,7 @@
 import { navigationContext } from "./App";
 import { logo } from "./header.module.css";
 import { useContext } from "react";
+import navValues from "./helpers/navValues";
 
 const subtitleStyle = {
   fontStyle: "italic",
