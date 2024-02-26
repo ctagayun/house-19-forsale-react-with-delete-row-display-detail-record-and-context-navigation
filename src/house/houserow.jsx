@@ -4,11 +4,13 @@ import currencyFormatter from "../helpers/currencyFormatter";
 import navValues from "../helpers/navValues";
 import { navigationContext } from "/src/app"; //exported from app.js
 
-const HouseRow = ({house, onRemoveItem}) => {
+//prop ahouserow is a one row to be written to HouseList component
+const HouseRow = ({ahouserow, onRemoveItem}) => {
    
    console.log("House Row fired")
-   const myHouse = JSON.stringify(house);
-   console.log("House prop = " + myHouse);
+   const myHouse = JSON.stringify(ahouserow);
+   console.log("Clicked House prop = " + myHouse);
+
     //Call useContext on the navigationContext.
     //This returns the state "object" consisting of 
     //    navTo 
@@ -30,22 +32,22 @@ const HouseRow = ({house, onRemoveItem}) => {
     
     return(
     <tr> 
-      <td onClick={() => navigate(house)}> 
-         <a>{house.objectID} </a> 
+      <td onClick={() => navigate(navValues.housedetail, ahouserow)}> 
+         <a>{ahouserow.objectID} </a> 
       </td>
-     <td>{house.address}</td>
-     <td>{house.country}</td>
+     <td>{ahouserow.address}</td>
+     <td>{ahouserow.country}</td>
     
      { 
-     house.price && (
-     <td className={`${house.price >= 500000 ? "text-primary" : ""}`}> 
-       {currencyFormatter.format(house.price)}
+     ahouserow.price && (
+     <td className={`${ahouserow.price >= 500000 ? "text-primary" : ""}`}> 
+       {currencyFormatter.format(ahouserow.price)}
      </td>
      )
      }
      <td>
      <span>
-      <button className="btn btn-primary" type="button" onClick={() => onRemoveItem(house)}>
+      <button className="btn btn-primary" type="button" onClick={() => onRemoveItem(ahouserow)}>
         Delete
       </button>
     </span>

@@ -11,14 +11,14 @@ const ComponentPicker = ({ currentNavLocation,
   const myCurrNavLoc = JSON.stringify(currentNavLocation);
   console.log("CurrentNavLocation = " + myCurrNavLoc);
 
-  const myList = JSON.stringify(list);
-  console.log("MyList of Searched Stories = " + myList);
+  //const myList = JSON.stringify(list);
+  //console.log("MyList of Searched Stories = " + myList);
   
-  const myonRemoveHouse = JSON.stringify(onRemoveHouse);
-  console.log("myonRemoveHouse = " + myonRemoveHouse);
+ //const myonRemoveHouse = JSON.stringify(onRemoveHouse);
+  //console.log("myonRemoveHouse = " + myonRemoveHouse);
 
-  const myonAddHouse = JSON.stringify(onAddHouse);
-  console.log("myonAddHouse = " + myonAddHouse);
+ // const myonAddHouse = JSON.stringify(onAddHouse);
+//  console.log("myonAddHouse = " + myonAddHouse);
 
   switch (currentNavLocation) {
     case navValues.houselist:

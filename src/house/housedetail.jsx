@@ -9,6 +9,11 @@ import defaultPhoto from "../images/defaultPhoto";
 import { navigationContext } from "/src/app";
 
 const HouseDetail = ({ house, onClick }) => {
+  console.log("House Detail fired")
+
+  const detailHouse = JSON.stringify(house);
+   console.log("Detail House prop = " + detailHouse);
+   
   //Access the navigation context
   //First destructure param and RENAME it to housedetail 
   //for clarity AND WE DON'T HAVE TO CHANGE IN THE 

@@ -4,8 +4,10 @@ import HouseRow  from './houserow';
 //import {navigationContext} from "../app";
 //import { HouseRowMemoized } from './houserow';
 
-//We are not using selectedHouseSetter in HouseList. We just 
-//want to pass it as props to HouseRow
+//const HouseList = ({list, onRemoveHouse, onAddHouse, onselectHouse, selectedHouseSetter}) =>
+//onselectHouse, selectedHouseSetter which previously points to setSelectedHouseWrapper
+//in App.jsx which we deleted is no longer needed. Instead we will 
+//declare NAVIGATIONCONTEXT in app.jsx
 const HouseList = ({list, 
                    onRemoveHouse,
                    onAddHouse, 
@@ -41,7 +43,7 @@ const HouseList = ({list,
                   <HouseRow
                       key={record.objectID}
                       objectID={record.objectID} 
-                      house={record}  
+                      ahouserow={record}  
                       onRemoveItem = {onRemoveHouse} //contains the onRemoveItem handler
                   />
                 ))}

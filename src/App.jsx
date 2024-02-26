@@ -318,7 +318,6 @@ const handleSearchSubmit = () => {  //CC
    const navigate = React.useCallback(
       (navTo, param) => setNavState({current:navTo, param, navigate}), 
               //Add "navTo", "param", "navigate" to the state object
-
               //By passing the three items in the state object,
               //we are passing a complex object instead of a simple variable:                             //the callback function "navigate", param,
               //  1. "navTo" indicates where to navigate to.
@@ -332,23 +331,26 @@ const handleSearchSubmit = () => {  //CC
          //            
          //    const [navState, setNavState] = 
          //        React.useState({current: navValues.houselist, navigate});
-
+      
       [] //Impt. Use an empty dependency array because the function will
          //made available to all components and we are not sure
          //what they will do with it. In the future other developers
          //might add functionality... then useCallback is good to use
+
    );
  
   //Impt. Again  Current: means instead of just the navTo value an object
   //is passed in with the "CURRENT" property containing the navValues
   //and the function "navigate"      
- const [navState, setNavState] = React.useState({current: navValues.houselist, 
-                                                 navigate});
+ const [navState, setNavState] = React.useState(
+              {current: navValues.houselist, navigate});
     
   return (
     //Provider give values of the context to its child components.
     //Very important! Dont provide static value. But create 
-    //state and use it as a value and manipulate its value using
+    //state:
+    //     const [navState, setNavState] = React.useState()
+    // and use it as a value and manipulate its value using
     //setNavState in the child components (see houseRow and houseList)
     <navigationContext.Provider value={navState}>
         <Header  headerText={welcome} /> 
