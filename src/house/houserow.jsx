@@ -30,7 +30,7 @@ const HouseRow = ({house, onRemoveItem}) => {
     
     return(
     <tr> 
-      <td onClick={() => navigate(navValues.housedetail)}> 
+      <td onClick={() => navigate(house)}> 
          <a>{house.objectID} </a> 
       </td>
      <td>{house.address}</td>

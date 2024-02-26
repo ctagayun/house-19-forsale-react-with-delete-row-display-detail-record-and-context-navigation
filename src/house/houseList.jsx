@@ -43,8 +43,6 @@ const HouseList = ({list,
                       objectID={record.objectID} 
                       house={record}  
                       onRemoveItem = {onRemoveHouse} //contains the onRemoveItem handler
-                      //onSelectHouse={onSelectHouse}
-                      //selectedHouseSetter = {selectedHouseSetter}
                   />
                 ))}
               </tbody>

@@ -15,8 +15,8 @@ const HouseDetail = ({ house, onClick }) => {
   //ORIGINAL JSX (e.g  housedetail.country, housedetail.address)
   const {param: housedetail} = useContext(navigationContext);
  
-  const myHouse = JSON.stringify(housedetail);
-  console.log("House Detail STORE IN PARAM IS = " + myHouse);
+  const myHouse = JSON.stringify(house);
+  console.log("House Detail STORED IN PARAM IS = " + myHouse);
   return (
     <div>
       <div className="row">
@@ -25,7 +25,7 @@ const HouseDetail = ({ house, onClick }) => {
           <img
             className="img-fluid"
             src={
-              housedetail.photo ? `./src/images/houseImages/${housedetail.photo}.jpeg` : defaultPhoto
+              house.photo ? `./src/images/houseImages/${housedetail.photo}.jpeg` : defaultPhoto
             }
             alt="HouseDetail picture"
           />
